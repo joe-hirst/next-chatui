@@ -2,13 +2,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { NextResponse } from "next/server";
 import { ChatMessage } from "@/types/chat";
 
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
+const genAI = new GoogleGenerativeAI(process.env.API_KEY!);
 
 export async function POST(req: Request) {
   try {
     const { messages }: { messages: ChatMessage[] } = await req.json();
     const model = genAI.getGenerativeModel({
-      model: process.env.GOOGLE_MODEL!,
+      model: process.env.MODEL_NAME!,
     });
 
     // Convert messages to the format Gemini expects
