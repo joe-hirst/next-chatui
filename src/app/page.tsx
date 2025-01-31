@@ -2,7 +2,6 @@
 
 import { useState, useRef, useEffect } from "react";
 import { ChatMessage } from "@/types/chat";
-import classNames from "classnames";
 
 export default function Home() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -58,7 +57,7 @@ export default function Home() {
   };
 
   return (
-    <main className="flex min-h-screen bg-gray-50">
+    <main className="flex min-h-screen bg-gray-900">
       {/* Conversation container */}
       <div className="flex-1 flex flex-col">
         {/* Messages area */}
@@ -68,7 +67,7 @@ export default function Home() {
               <div
                 key={index}
                 className={`mb-6 flex items-start ${
-                  message.role === "assistant" ? "bg-white" : ""
+                  message.role === "assistant" ? "bg-transparent" : ""
                 }`}
               >
                 {/* Avatar */}
@@ -76,34 +75,40 @@ export default function Home() {
                   <div
                     className={`w-8 h-8 rounded-sm flex items-center justify-center ${
                       message.role === "assistant"
-                        ? "bg-emerald-500"
+                        ? "bg-emerald-600"
                         : "bg-gray-600"
                     }`}
                   >
                     {message.role === "assistant" ? (
-                      // Assistant icon (you can replace with your own)
-                      <span className="text-white text-sm">AI</span>
+                      <span className="text-gray-100 text-sm">AI</span>
                     ) : (
-                      // User icon (you can replace with your own)
-                      <span className="text-white text-sm">U</span>
+                      <span className="text-gray-100 text-sm">U</span>
                     )}
                   </div>
                 </div>
                 {/* Message content */}
-                <div className="flex-1 space-y-2">
-                  <p className="prose prose-sm max-w-none">{message.content}</p>
+                <div
+                  className={`flex-1 space-y-2 px-4 py-3 rounded-lg ${
+                    message.role === "assistant"
+                      ? "bg-gray-800 text-gray-100"
+                      : "bg-gray-700 text-gray-100"
+                  }`}
+                >
+                  <p className="prose prose-invert prose-sm max-w-none">
+                    {message.content}
+                  </p>
                 </div>
               </div>
             ))}
             {isLoading && (
               <div className="mb-6 flex items-start">
                 <div className="mr-3 flex-shrink-0">
-                  <div className="w-8 h-8 rounded-sm bg-emerald-500 flex items-center justify-center">
-                    <span className="text-white text-sm">AI</span>
+                  <div className="w-8 h-8 rounded-sm bg-emerald-600 flex items-center justify-center">
+                    <span className="text-gray-100 text-sm">AI</span>
                   </div>
                 </div>
-                <div className="flex-1">
-                  <p className="text-gray-600">Thinking...</p>
+                <div className="flex-1 px-4 py-3 rounded-lg bg-gray-800">
+                  <p className="text-gray-300">Thinking...</p>
                 </div>
               </div>
             )}
@@ -112,7 +117,7 @@ export default function Home() {
         </div>
 
         {/* Input area */}
-        <div className="border-t bg-white">
+        <div className="border-t border-gray-700 bg-gray-800">
           <div className="max-w-3xl mx-auto p-4">
             <form onSubmit={handleSubmit}>
               <div className="relative flex items-center">
@@ -121,13 +126,15 @@ export default function Home() {
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   placeholder="Send a message..."
-                  className="w-full p-4 pr-20 rounded-lg border border-gray-300 focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
+                  className="w-full p-4 pr-20 rounded-lg bg-gray-700 border border-gray-600 
+                         text-gray-100 placeholder-gray-400
+                         focus:outline-none focus:border-emerald-500 focus:ring-1 focus:ring-emerald-500"
                   disabled={isLoading}
                 />
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="absolute right-2 p-2 text-gray-500 hover:text-emerald-500 disabled:opacity-50"
+                  className="absolute right-2 p-2 text-gray-400 hover:text-emerald-500 disabled:opacity-50"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -140,9 +147,9 @@ export default function Home() {
                 </button>
               </div>
             </form>
-            <p className="mt-2 text-xs text-center text-gray-400">
-              Free Preview. AI may produce inaccurate information about people,
-              places, or facts.
+            <p className="mt-2 text-xs text-center text-gray-500">
+              AI may produce inaccurate information about people, places, or
+              facts.
             </p>
           </div>
         </div>
