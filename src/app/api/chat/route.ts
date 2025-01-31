@@ -7,7 +7,9 @@ const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY!);
 export async function POST(req: Request) {
   try {
     const { messages }: { messages: ChatMessage[] } = await req.json();
-    const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+    const model = genAI.getGenerativeModel({
+      model: process.env.GOOGLE_MODEL!,
+    });
 
     // Convert messages to the format Gemini expects
     const history = messages.slice(0, -1).map((msg) => ({
