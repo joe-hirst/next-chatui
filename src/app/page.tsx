@@ -11,6 +11,7 @@ export default function Home() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isAuthChecking, setIsAuthChecking] = useState(true);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const router = useRouter();
 
@@ -21,6 +22,8 @@ export default function Home() {
       } = await supabase.auth.getSession();
       if (!session) {
         router.push("/login");
+      } else {
+        setIsAuthChecking(false);
       }
     };
 
@@ -73,6 +76,14 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  if (isAuthChecking) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gray-900">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-emerald-500"></div>
+      </div>
+    );
+  }
 
   return (
     <main className="flex min-h-screen bg-gray-900">
