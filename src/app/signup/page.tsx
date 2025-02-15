@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
@@ -19,7 +19,6 @@ export default function SignUp() {
     setSuccess("");
 
     try {
-      // Sign up the user using Supabase
       const { data, error } = await supabase.auth.signUp({
         email,
         password,
@@ -29,10 +28,9 @@ export default function SignUp() {
 
       console.log("Account creation successful:", data);
 
-      // If sign-up is successful, show a success message and redirect
       setSuccess("Account created successfully! Redirecting to login...");
       setTimeout(() => {
-        router.push("/login"); // Redirect to the login page
+        router.push("/login");
       }, 2000); // Redirect after 2 seconds
     } catch (err) {
       setError(err.message || "An error occurred during sign-up.");

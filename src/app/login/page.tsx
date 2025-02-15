@@ -1,4 +1,4 @@
-"use client"; // Mark this as a Client Component
+"use client";
 
 import { useState } from "react";
 import { supabase } from "@/lib/supabaseClient";
@@ -17,7 +17,6 @@ export default function Login() {
     setError("");
 
     try {
-      // Log in the user using Supabase
       const { data, error } = await supabase.auth.signInWithPassword({
         email,
         password,
@@ -25,10 +24,8 @@ export default function Login() {
 
       if (error) throw error;
 
-      // Use the `data` variable (e.g., log it or store it in state)
       console.log("Login successful:", data);
 
-      // If login is successful, redirect to the chat page
       router.push("/");
     } catch (err) {
       setError(err.message || "An error occurred during login.");
