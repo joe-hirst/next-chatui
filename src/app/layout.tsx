@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "ChatUI",
-  description: "Chat Interface for Intracting with LLMs",
+  description: "Chat Interface",
 };
 
 export default function RootLayout({

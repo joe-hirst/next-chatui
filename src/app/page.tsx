@@ -4,12 +4,28 @@ import { useState, useRef, useEffect } from "react";
 import { ChatMessage } from "@/types/chat";
 import { ChatInput } from "./components/chat/ChatInput";
 import { Message } from "./components/chat/Message";
+import { supabase } from "@/lib/supabaseClient";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      if (!session) {
+        router.push("/login");
+      }
+    };
+
+    checkSession();
+  }, [router]);
 
   const scrollToBottom = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });

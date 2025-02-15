@@ -1,6 +1,6 @@
 # 🤖 next-chatui
 
-A modern, responsive chat interface built with Next.js 15, TypeScript, and Tailwind CSS.
+A modern, responsive chat interface built with Next.js 15, TypeScript, Tailwind CSS, and Supabase authentication.
 
 ## 📸 Screenshots
 
@@ -9,6 +9,8 @@ A modern, responsive chat interface built with Next.js 15, TypeScript, and Tailw
 ## ✨ Features
 
 - 💬 Real-time chat interface with AI
+- 🔒 User authentication with Supabase
+- 📝 User registration and login
 - 🎨 Clean and responsive design
 - 🌙 Dark mode UI
 - 📜 Message history
@@ -21,15 +23,20 @@ A modern, responsive chat interface built with Next.js 15, TypeScript, and Tailw
 - 📦 Node.js (v18 or higher)
 - 📦 PNPM package manager
 - 🔑 API key for your chosen LLM provider
+- 🗄️ Supabase account and project
 
 ## 🔐 Environment Variables
 
 Create a `.env.local` file in the root directory with the following variables:
 
 ```env
-# Configure based on your chosen LLM provider
+# LLM Provider Configuration
 API_KEY=your_api_key_here
 MODEL_NAME=your_model_name
+
+# Supabase Configuration
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
 ```
 
 ## 🚀 Installation
@@ -71,7 +78,11 @@ src/
 │   │   └── chat/        # API endpoint for chat
 │   ├── components/
 │   │   └── chat/        # Chat UI components
+│   ├── login/           # Login page
+│   ├── signup/          # Signup page
 │   └── page.tsx         # Main chat interface
+├── lib/
+│   └── supabaseClient.ts # Supabase client configuration
 └── types/
     └── chat.ts          # TypeScript definitions
 ```
@@ -81,6 +92,16 @@ src/
 - ⚛️ [Next.js](https://nextjs.org/) - React framework
 - 📘 [TypeScript](https://www.typescriptlang.org/) - Type safety
 - 🎨 [Tailwind CSS](https://tailwindcss.com/) - Styling
+- 🔒 [Supabase](https://supabase.com/) - Authentication & Backend
+- 🤖 [Google AI](https://ai.google.dev/) - Chat API
+
+## 🔒 Authentication Features
+
+- User registration with email and password
+- Secure login system
+- Protected routes with middleware
+- Automatic session management
+- Logout functionality
 
 ## 💻 Development
 
